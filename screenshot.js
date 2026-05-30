@@ -31,6 +31,7 @@ const SITES = [
     portfolio: 'work-didi',
     scrolls: [0, 0.25, 0.5, 0, 0.38, 0, 0.25],
     mobileSlots: [5, 6],
+    extraWait: 3000,
   },
 ];
 
@@ -45,7 +46,7 @@ async function login(page, creds) {
   await page.waitForTimeout(3000);
 }
 
-async function waitForFullLoad(page) {
+async function waitForFullLoad(page, extraWait = 0) {
   // wait for fonts
   await page.evaluate(() => document.fonts.ready);
   // scroll full page to trigger lazy-loaded images
@@ -61,15 +62,19 @@ async function waitForFullLoad(page) {
       requestAnimationFrame(step);
     });
   });
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(2000);
   // wait for all images to finish loading
   await page.evaluate(() => Promise.all(
     Array.from(document.images).map(img =>
       img.complete ? Promise.resolve() : new Promise(r => { img.onload = r; img.onerror = r; })
     )
   ));
-  await page.waitForTimeout(1000);
-  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(1000 + extraWait);
+  // scroll back to top and wait for page to settle
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await page.waitForTimeout(2000);
+  // verify we're at top
+  await page.evaluate(() => { document.documentElement.scrollTop = 0; window.scrollY && window.scrollTo(0, 0); });
   await page.waitForTimeout(500);
 }
 
@@ -118,10 +123,12 @@ async function shoot(page, scroll) {
         await pageD.waitForTimeout(3000);
       }
 
-      await waitForFullLoad(pageD);
+      await waitForFullLoad(pageD, site.extraWait || 0);
       console.log(`  ✓ page fully loaded`);
 
-      // portfolio card thumbnail (top of page, desktop)
+      // portfolio card thumbnail — ensure we're at the very top
+      await pageD.evaluate(() => { window.scrollTo(0, 0); document.documentElement.scrollTop = 0; });
+      await pageD.waitForTimeout(1500);
       const portfolioBuf = await shoot(pageD, 0);
       fs.writeFileSync(path.join(outDir, `${site.id}-desktop.png`), portfolioBuf);
       sidecar[site.portfolio] = { u: await toDataUrl(portfolioBuf), s: 1, x: 0, y: 0 };
@@ -159,7 +166,7 @@ async function shoot(page, scroll) {
         await pageM.waitForTimeout(3000);
       }
 
-      await waitForFullLoad(pageM);
+      await waitForFullLoad(pageM, site.extraWait || 0);
 
       for (const i of site.mobileSlots) {
         await pageM.evaluate(() => window.scrollTo(0, 0));
