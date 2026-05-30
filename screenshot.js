@@ -65,26 +65,24 @@ async function dismissPopups(page) {
     } catch {}
   }
 
-  // forcefully remove any overlay/modal elements from DOM
+  // remove ALL fixed/absolute elements with high z-index (overlays, modals, popups)
   await page.evaluate(() => {
-    const selectors = [
-      '[class*="overlay"]', '[class*="modal"]', '[class*="popup"]',
-      '[class*="dialog"]', '[class*="Modal"]', '[class*="Popup"]',
-      '[class*="Overlay"]', '[role="dialog"]', '[role="alertdialog"]',
-    ];
-    selectors.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => {
-        const style = window.getComputedStyle(el);
-        if (style.position === 'fixed' || style.position === 'absolute') {
-          el.remove();
+    document.querySelectorAll('*').forEach(el => {
+      try {
+        const s = window.getComputedStyle(el);
+        const z = parseInt(s.zIndex) || 0;
+        if ((s.position === 'fixed' || (s.position === 'absolute' && z > 50)) && z > 50) {
+          // keep nav/header by checking if element is a normal nav
+          const tag = el.tagName.toLowerCase();
+          if (tag !== 'nav' && tag !== 'header') el.remove();
         }
-      });
+      } catch {}
     });
-    // also restore body scroll
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
+    document.body.style.height = '';
   });
-  await page.waitForTimeout(300);
+  await page.waitForTimeout(400);
 }
 
 async function login(page, creds) {
