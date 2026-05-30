@@ -21,6 +21,7 @@ const SITES = [
     portfolio: 'work-sushi',
     scrolls: [0, 0.3, 0.55, 0, 0.4, 0, 0.3],
     mobileSlots: [5, 6],
+    login: process.env.SUSHI_USER ? { user: process.env.SUSHI_USER, pass: process.env.SUSHI_PASS } : null,
   },
   {
     url: 'https://didifun.co.il/',
@@ -35,6 +36,13 @@ const SITES = [
 
 async function toDataUrl(buffer) {
   return 'data:image/png;base64,' + buffer.toString('base64');
+}
+
+async function login(page, creds) {
+  await page.fill('input[type="email"], input[type="text"], input[name="email"], input[name="username"]', creds.user);
+  await page.fill('input[type="password"]', creds.pass);
+  await page.click('button[type="submit"], button:has-text("כניסה"), button:has-text("התחבר")');
+  await page.waitForTimeout(3000);
 }
 
 async function shoot(page, scroll) {
@@ -73,8 +81,15 @@ async function shoot(page, scroll) {
     const pageD = await ctxD.newPage();
 
     try {
-      await pageD.goto(site.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-      await pageD.waitForTimeout(3000);
+      await pageD.goto(site.url, { waitUntil: 'networkidle', timeout: 45000 });
+      await pageD.waitForTimeout(5000);
+
+      if (site.login) {
+        await login(pageD, site.login);
+        console.log(`  🔑 logged in`);
+        // wait for dashboard to fully load after login
+        await pageD.waitForTimeout(4000);
+      }
 
       // portfolio card thumbnail (top of page, desktop)
       const portfolioBuf = await shoot(pageD, 0);
@@ -83,9 +98,9 @@ async function shoot(page, scroll) {
       console.log(`  ✓ portfolio card: ${site.portfolio}`);
 
       for (let i = 0; i < site.slots.length; i++) {
-        if (site.mobileSlots.includes(i)) continue; // skip mobile slots here
+        if (site.mobileSlots.includes(i)) continue;
         await pageD.evaluate(() => window.scrollTo(0, 0));
-        await pageD.waitForTimeout(300);
+        await pageD.waitForTimeout(800);
         const buf = await shoot(pageD, site.scrolls[i]);
         fs.writeFileSync(path.join(outDir, `${site.id}-slot${i}.png`), buf);
         sidecar[site.slots[i]] = { u: await toDataUrl(buf), s: 1, x: 0, y: 0 };
@@ -106,12 +121,17 @@ async function shoot(page, scroll) {
     const pageM = await ctxM.newPage();
 
     try {
-      await pageM.goto(site.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-      await pageM.waitForTimeout(2500);
+      await pageM.goto(site.url, { waitUntil: 'networkidle', timeout: 45000 });
+      await pageM.waitForTimeout(4000);
+
+      if (site.login) {
+        await login(pageM, site.login);
+        await pageM.waitForTimeout(4000);
+      }
 
       for (const i of site.mobileSlots) {
         await pageM.evaluate(() => window.scrollTo(0, 0));
-        await pageM.waitForTimeout(300);
+        await pageM.waitForTimeout(800);
         const buf = await shoot(pageM, site.scrolls[i]);
         fs.writeFileSync(path.join(outDir, `${site.id}-slot${i}-mobile.png`), buf);
         sidecar[site.slots[i]] = { u: await toDataUrl(buf), s: 1, x: 0, y: 0 };
