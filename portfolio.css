@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* ---- portfolio hero ---- */
-.p-hero { padding: 84px 0 96px; }
+.p-hero { padding-top: 84px; padding-bottom: 96px; }
 .p-hero .eyebrow { margin-bottom: 26px; }
 .p-hero h1 {
   font-family: var(--font-display); font-weight: var(--disp-weight);
