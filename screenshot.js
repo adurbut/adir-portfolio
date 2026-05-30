@@ -46,11 +46,13 @@ async function shoot(page, scroll) {
 }
 
 (async () => {
-  const browser = await chromium.launch({
-    executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+  const customExe = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+  const launchOpts = {
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
            '--disable-blink-features=AutomationControlled'],
-  });
+  };
+  if (fs.existsSync(customExe)) launchOpts.executablePath = customExe;
+  const browser = await chromium.launch(launchOpts);
 
   const outDir = path.join(__dirname, 'screenshots');
   fs.mkdirSync(outDir, { recursive: true });
