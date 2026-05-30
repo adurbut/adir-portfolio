@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Arial',sans-serif;background:#0f1117;color:#e8e8e8;direction:rtl;font-size:15px}
+.sidebar{position:fixed;right:0;top:0;width:240px;height:100vh;background:#1a1d27;border-left:1px solid #2a2d3a;padding:24px 0}
+.logo{padding:0 24px 24px;border-bottom:1px solid #2a2d3a;font-size:20px;font-weight:800;color:#fff;display:flex;align-items:center;gap:10px}
+.logo-icon{background:#3b82f6;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.nav-item{padding:10px 24px;display:flex;align-items:center;gap:12px;font-size:14px;color:#888;cursor:pointer}
+.nav-item.active{background:#252836;color:#fff;border-right:3px solid #3b82f6}
+.nav-item .icon{width:18px;height:18px;opacity:.7}
+.main{margin-right:240px;padding:32px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.topbar h1{font-size:24px;font-weight:700;color:#fff}
+.btn-new{background:#3b82f6;color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat{background:#1a1d27;border:1px solid #2a2d3a;border-radius:12px;padding:20px}
+.stat-label{font-size:12px;color:#666;margin-bottom:8px;font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+.stat-val{font-size:28px;font-weight:800;color:#fff}
+.stat-val.blue{color:#3b82f6}
+.stat-val.green{color:#22c55e}
+.stat-val.orange{color:#f59e0b}
+.stat-val.red{color:#ef4444}
+.table-wrap{background:#1a1d27;border:1px solid #2a2d3a;border-radius:12px;overflow:hidden}
+.table-head{padding:16px 24px;border-bottom:1px solid #2a2d3a;display:flex;justify-content:space-between;align-items:center}
+.table-head h2{font-size:16px;font-weight:700;color:#fff}
+.filter-row{display:flex;gap:8px}
+.filter-btn{padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500;background:#252836;color:#888}
+.filter-btn.active{background:#3b82f6;color:#fff}
+table{width:100%;border-collapse:collapse}
+th{padding:12px 24px;text-align:right;font-size:12px;font-weight:600;color:#666;border-bottom:1px solid #2a2d3a;letter-spacing:.04em;text-transform:uppercase}
+td{padding:14px 24px;font-size:14px;border-bottom:1px solid #1e2130;color:#ccc}
+tr:hover td{background:#1e2130}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.badge.new{background:rgba(59,130,246,.15);color:#3b82f6}
+.badge.progress{background:rgba(245,158,11,.15);color:#f59e0b}
+.badge.done{background:rgba(34,197,94,.15);color:#22c55e}
+.badge.wait{background:rgba(139,92,246,.15);color:#8b5cf6}
+.priority{display:inline-flex;align-items:center;gap:4px;font-size:13px}
+.priority.high{color:#ef4444}
+.priority.med{color:#f59e0b}
+.priority.low{color:#22c55e}
+.avatar{width:28px;height:28px;border-radius:50%;background:#3b82f6;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo"><div class="logo-icon">🍣</div> Sushi · כיוונים</div>
+  <div class="nav-item active">📋 כל הבקשות</div>
+  <div class="nav-item">➕ בקשה חדשה</div>
+  <div class="nav-item">⏳ ממתין לאישור</div>
+  <div class="nav-item">✅ הושלמו</div>
+  <div class="nav-item">👥 לקוחות</div>
+  <div class="nav-item">📊 דוחות</div>
+  <div class="nav-item" style="margin-top:auto">⚙️ הגדרות</div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <h1>בקשות סושיאל מדיה</h1>
+    <div class="btn-new">+ בקשה חדשה</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-label">סה"כ פעילות</div><div class="stat-val blue">47</div></div>
+    <div class="stat"><div class="stat-label">בעבודה</div><div class="stat-val orange">12</div></div>
+    <div class="stat"><div class="stat-label">הושלמו השבוע</div><div class="stat-val green">23</div></div>
+    <div class="stat"><div class="stat-label">דחוף</div><div class="stat-val red">3</div></div>
+  </div>
+  <div class="table-wrap">
+    <div class="table-head">
+      <h2>רשימת בקשות</h2>
+      <div class="filter-row">
+        <div class="filter-btn active">הכל</div>
+        <div class="filter-btn">חדש</div>
+        <div class="filter-btn">בעבודה</div>
+        <div class="filter-btn">הושלם</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>כותרת</th><th>לקוח</th><th>סטטוס</th><th>עדיפות</th><th>תאריך יעד</th><th>אחראי</th></tr></thead>
+      <tbody>
+        <tr><td><strong>פוסט אינסטגרם — קידום קיץ</strong></td><td>מסעדת הים הכחול</td><td><span class="badge progress">⚡ בעבודה</span></td><td><span class="priority high">🔴 גבוה</span></td><td>31.05</td><td><span class="avatar">א</span></td></tr>
+        <tr><td><strong>סטורי שבועי — ג'ינס קולקשן</strong></td><td>בוטיק מיטל</td><td><span class="badge new">🆕 חדש</span></td><td><span class="priority med">🟡 בינוני</span></td><td>02.06</td><td><span class="avatar">ל</span></td></tr>
+        <tr><td><strong>קמפיין ריילז — פתיחת סניף</strong></td><td>קפה אורה</td><td><span class="badge wait">🔄 ממתין</span></td><td><span class="priority high">🔴 גבוה</span></td><td>28.05</td><td><span class="avatar">מ</span></td></tr>
+        <tr><td><strong>כיסוי פייסבוק — אחרי שיפוץ</strong></td><td>Studio Fit</td><td><span class="badge done">✅ הושלם</span></td><td><span class="priority low">🟢 נמוך</span></td><td>25.05</td><td><span class="avatar">ד</span></td></tr>
+        <tr><td><strong>פוסט ביקורות — חודש מאי</strong></td><td>ד"ר שרה ליבוביץ</td><td><span class="badge progress">⚡ בעבודה</span></td><td><span class="priority med">🟡 בינוני</span></td><td>30.05</td><td><span class="avatar">נ</span></td></tr>
+        <tr><td><strong>לינקדאין — מנהלים חדשים</strong></td><td>כיוונים הנדסה</td><td><span class="badge done">✅ הושלם</span></td><td><span class="priority low">🟢 נמוך</span></td><td>24.05</td><td><span class="avatar">א</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

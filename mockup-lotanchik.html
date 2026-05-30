@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Arial',sans-serif;background:#fff;color:#1a1a1a;direction:rtl}
+.nav{background:#fff;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f0f0;box-shadow:0 1px 8px rgba(0,0,0,.06)}
+.nav-logo{font-size:22px;font-weight:800;color:#e040c0;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:28px;font-size:15px;color:#555;font-weight:500}
+.nav-cta{background:#25D366;color:#fff;padding:9px 20px;border-radius:25px;font-size:14px;font-weight:700}
+.hero{background:linear-gradient(135deg,#fce4f7 0%,#f3e4ff 50%,#e4f0ff 100%);padding:80px 40px;text-align:center}
+.hero-badge{background:#e040c0;color:#fff;display:inline-block;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:20px}
+.hero h1{font-size:52px;font-weight:900;color:#1a1a1a;line-height:1.15;margin-bottom:16px}
+.hero h1 span{color:#e040c0}
+.hero p{font-size:20px;color:#555;max-width:520px;margin:0 auto 36px;line-height:1.6}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-wa{background:#25D366;color:#fff;padding:16px 32px;border-radius:30px;font-size:17px;font-weight:800;display:inline-flex;align-items:center;gap:10px}
+.btn-wa::before{content:'📱'}
+.btn-more{background:transparent;color:#e040c0;padding:14px 28px;border-radius:30px;font-size:16px;font-weight:700;border:2px solid #e040c0}
+.hero-img{margin-top:48px;background:linear-gradient(180deg,#f3e4ff,#fce4f7);height:280px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:80px;max-width:700px;margin:48px auto 0}
+.services{padding:64px 40px;background:#fff}
+.services h2{font-size:36px;font-weight:800;text-align:center;margin-bottom:48px;color:#1a1a1a}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto}
+.card{background:linear-gradient(135deg,#fce4f7,#f3e4ff);border-radius:20px;padding:32px 24px;text-align:center}
+.card-icon{font-size:44px;margin-bottom:16px}
+.card h3{font-size:20px;font-weight:800;margin-bottom:8px;color:#1a1a1a}
+.card p{font-size:14px;color:#666;line-height:1.5}
+.gallery{padding:64px 40px;background:#f9f0ff}
+.gallery h2{font-size:36px;font-weight:800;text-align:center;margin-bottom:36px}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto}
+.gallery-item{aspect-ratio:1;background:linear-gradient(135deg,#e040c0,#9c27b0);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:36px}
+.reviews{padding:64px 40px;background:#fff}
+.reviews h2{font-size:36px;font-weight:800;text-align:center;margin-bottom:36px}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
+.review{background:#fce4f7;border-radius:16px;padding:24px;border-right:4px solid #e040c0}
+.stars{color:#f59e0b;font-size:18px;margin-bottom:8px}
+.review p{font-size:14px;color:#444;line-height:1.6;margin-bottom:12px}
+.review-name{font-weight:700;font-size:13px;color:#e040c0}
+.cta{background:linear-gradient(135deg,#e040c0,#9c27b0);padding:64px 40px;text-align:center;color:#fff}
+.cta h2{font-size:40px;font-weight:900;margin-bottom:16px}
+.cta p{font-size:18px;opacity:.9;margin-bottom:32px}
+.cta-btn{background:#fff;color:#e040c0;padding:18px 40px;border-radius:30px;font-size:18px;font-weight:800;display:inline-flex;align-items:center;gap:10px}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-logo">לוטנצ׳יק 🎈</div>
+  <div class="nav-links"><span>שירותים</span><span>גלריה</span><span>המלצות</span><span>צור קשר</span></div>
+  <div class="nav-cta">📱 וואטסאפ</div>
+</nav>
+<section class="hero">
+  <div class="hero-badge">🎉 הפעלות לילדים</div>
+  <h1>קסם, כיף ו<span>זיכרונות</span><br/>לכל החיים</h1>
+  <p>מסיבות קונספט מיוחדות, הפעלות יצירתיות ומופעים שהילדים לא ישכחו לעולם</p>
+  <div class="hero-btns">
+    <div class="btn-wa">שליחת וואטסאפ</div>
+    <div class="btn-more">לפרטים נוספים</div>
+  </div>
+  <div class="hero-img">🎈🎪🎠</div>
+</section>
+<section class="services">
+  <h2>מה אני מציעה?</h2>
+  <div class="cards">
+    <div class="card"><div class="card-icon">🎂</div><h3>מסיבות קונספט</h3><p>עיצוב ייחודי לכל נושא, כולל קישוטים, פעילויות ותלבושות</p></div>
+    <div class="card"><div class="card-icon">🎭</div><h3>הפעלות</h3><p>שעות כיף עם משחקים, יצירה וריקודים לכל גיל</p></div>
+    <div class="card"><div class="card-icon">🎪</div><h3>מופעים</h3><p>הופעות לאירועים — בתי ספר, גני ילדים ואירועים פרטיים</p></div>
+  </div>
+</section>
+<section class="gallery">
+  <h2>מהגלריה שלנו 📸</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">🎉</div><div class="gallery-item">🦄</div>
+    <div class="gallery-item">🎪</div><div class="gallery-item">🌈</div>
+  </div>
+</section>
+<section class="reviews">
+  <h2>מה אמרו עלינו ⭐</h2>
+  <div class="review-grid">
+    <div class="review"><div class="stars">★★★★★</div><p>״לוטן עשתה לבתי יום הולדת שהיא לא תשכח לעולם. כל הילדים נהנו!״</p><div class="review-name">מיכל כהן, אמא של שיר</div></div>
+    <div class="review"><div class="stars">★★★★★</div><p>״מקצועית, אמינה ומדהימה עם ילדים. ממליצה בחום לכל אחת!״</p><div class="review-name">רחל לוי, גן ילדים</div></div>
+    <div class="review"><div class="stars">★★★★★</div><p>״הגיעה מוכנה עם כל הציוד, הילדים לא הפסיקו לצחוק שעתיים!״</p><div class="review-name">דנה ישראלי, אמא של תום</div></div>
+  </div>
+</section>
+<section class="cta">
+  <h2>מוכנים לחגוג? 🎊</h2>
+  <p>שלחו הודעה עכשיו ונתאם את ההפעלה המושלמת לילד שלכם</p>
+  <div class="cta-btn">📱 שלחו וואטסאפ עכשיו</div>
+</section>
+</body>
+</html>

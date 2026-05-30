@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Arial',sans-serif;background:#fff;color:#1a1a1a;direction:rtl;overflow-x:hidden}
+.nav{background:#fff;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0e8ff;position:sticky;top:0;z-index:10}
+.nav-logo{font-size:24px;font-weight:900;background:linear-gradient(90deg,#7c3aed,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:28px;font-size:15px;color:#666;font-weight:500}
+.hero{background:linear-gradient(135deg,#fdf4ff 0%,#f0f4ff 50%,#fff7e6 100%);padding:88px 40px 64px;display:flex;align-items:center;justify-content:space-between;gap:48px;max-width:1200px;margin:0 auto}
+.hero-text{flex:1}
+.hero-badge{background:rgba(124,58,237,.12);color:#7c3aed;display:inline-block;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:20px}
+.hero h1{font-size:52px;font-weight:900;line-height:1.1;margin-bottom:16px;color:#1a1a1a}
+.hero h1 .accent{color:#7c3aed}
+.hero p{font-size:18px;color:#555;line-height:1.65;max-width:440px;margin-bottom:32px}
+.hero-btns{display:flex;gap:14px}
+.btn-primary{background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;padding:14px 28px;border-radius:14px;font-size:16px;font-weight:700}
+.btn-secondary{background:transparent;color:#7c3aed;padding:13px 26px;border-radius:14px;font-size:16px;font-weight:700;border:2px solid #7c3aed}
+.hero-art{flex:0 0 380px;height:340px;background:linear-gradient(135deg,#f0e4ff,#ffe4f4);border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:100px}
+.section{padding:72px 40px;max-width:1200px;margin:0 auto}
+.section-label{font-size:13px;font-weight:700;letter-spacing:.12em;color:#7c3aed;text-transform:uppercase;margin-bottom:12px}
+.section h2{font-size:36px;font-weight:900;margin-bottom:40px;line-height:1.15}
+.songs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.song-card{background:linear-gradient(135deg,#f5f0ff,#fff0f9);border-radius:20px;padding:24px;display:flex;gap:16px;align-items:center;border:1px solid #f0e4ff}
+.song-thumb{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#ec4899);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.song-info h4{font-size:16px;font-weight:800;margin-bottom:4px}
+.song-info p{font-size:13px;color:#888}
+.play-btn{background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:8px}
+.tv-section{background:linear-gradient(135deg,#1a0033,#0d001a);padding:72px 40px;color:#fff;text-align:center}
+.tv-section .section-label{color:#a78bfa}
+.tv-section h2{color:#fff;margin-bottom:24px}
+.tv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:36px auto 0}
+.tv-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#2d0057,#1a0033);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;border:1px solid rgba(255,255,255,.1);position:relative}
+.tv-play{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px}
+.activities{background:#f9f5ff;padding:72px 40px}
+.activities-inner{max-width:1200px;margin:0 auto}
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.act-card{background:#fff;border-radius:20px;padding:28px;border:1px solid #f0e4ff}
+.act-icon{font-size:40px;margin-bottom:16px}
+.act-card h3{font-size:20px;font-weight:800;margin-bottom:8px}
+.act-card p{font-size:14px;color:#666;line-height:1.6}
+.act-tag{display:inline-block;background:rgba(124,58,237,.1);color:#7c3aed;padding:4px 10px;border-radius:10px;font-size:12px;font-weight:700;margin-top:12px}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-logo">דידי דימיוני ✨</div>
+  <div class="nav-links"><span>שירים</span><span>הפעלות</span><span>דידי TV</span><span>הזמנות</span><span>צור קשר</span></div>
+</nav>
+<section style="padding:0 40px;max-width:1200px;margin:0 auto">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">🌟 עולם הדמיון של דידי</div>
+      <h1>שירים, כיף ו<span class="accent">קסם</span><br/>לכל ילד</h1>
+      <p>הפעלות יצירתיות, שירים מקוריים ומופעים שמדליקים את הדמיון ומשאירים חיוכים</p>
+      <div class="hero-btns">
+        <div class="btn-primary">לצפייה בשירים 🎵</div>
+        <div class="btn-secondary">להזמין הפעלה</div>
+      </div>
+    </div>
+    <div class="hero-art">🌈</div>
+  </div>
+</section>
+<section class="section">
+  <div class="section-label">🎵 מוזיקה</div>
+  <h2>שירים מקוריים של דידי</h2>
+  <div class="songs-grid">
+    <div class="song-card"><div class="song-thumb">🌟</div><div class="song-info"><h4>כוכב קטן</h4><p>2:45 · אלבום ראשון</p><div class="play-btn">▶</div></div></div>
+    <div class="song-card"><div class="song-thumb">🦋</div><div class="song-info"><h4>הפרפר הצבעוני</h4><p>3:10 · אלבום שני</p><div class="play-btn">▶</div></div></div>
+    <div class="song-card"><div class="song-thumb">🌈</div><div class="song-info"><h4>הקשת בענן</h4><p>2:58 · אלבום שני</p><div class="play-btn">▶</div></div></div>
+  </div>
+</section>
+<section class="tv-section">
+  <div class="section-label">📺 ערוץ</div>
+  <h2>דידי TV 🎬</h2>
+  <p style="opacity:.75;font-size:17px;max-width:480px;margin:0 auto">שירים, סיפורים והפעלות — ישירות מהסלון שלכם</p>
+  <div class="tv-grid">
+    <div class="tv-thumb">🌟<div class="tv-play">▶</div></div>
+    <div class="tv-thumb">🦄<div class="tv-play">▶</div></div>
+    <div class="tv-thumb">🎪<div class="tv-play">▶</div></div>
+    <div class="tv-thumb">🌈<div class="tv-play">▶</div></div>
+  </div>
+</section>
+<section class="activities">
+  <div class="activities-inner">
+    <div class="section-label">🎨 פעילויות</div>
+    <h2>הפעלות וקונספטים</h2>
+    <div class="act-grid">
+      <div class="act-card"><div class="act-icon">🦄</div><h3>חד קרן קסום</h3><p>הפעלה צבעונית עם קישוטים, כתרים ועוגת חד קרן</p><div class="act-tag">גיל 3–7</div></div>
+      <div class="act-card"><div class="act-icon">🚀</div><h3>חלל ועתיד</h3><p>מסע בין כוכבים עם תחפושות, משחקים ומאכלים מהחלל</p><div class="act-tag">גיל 5–10</div></div>
+      <div class="act-card"><div class="act-icon">🎨</div><h3>אמן קטן</h3><p>יצירה חופשית עם צבעים, פיסול ועיצוב אישי לכל ילד</p><div class="act-tag">כל גיל</div></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
