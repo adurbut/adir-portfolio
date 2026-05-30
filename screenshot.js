@@ -45,10 +45,38 @@ async function login(page, creds) {
   await page.waitForTimeout(3000);
 }
 
+async function waitForFullLoad(page) {
+  // wait for fonts
+  await page.evaluate(() => document.fonts.ready);
+  // scroll full page to trigger lazy-loaded images
+  await page.evaluate(async () => {
+    await new Promise(resolve => {
+      let pos = 0;
+      const step = () => {
+        window.scrollTo(0, pos);
+        pos += 400;
+        if (pos < document.body.scrollHeight) requestAnimationFrame(step);
+        else resolve();
+      };
+      requestAnimationFrame(step);
+    });
+  });
+  await page.waitForTimeout(1500);
+  // wait for all images to finish loading
+  await page.evaluate(() => Promise.all(
+    Array.from(document.images).map(img =>
+      img.complete ? Promise.resolve() : new Promise(r => { img.onload = r; img.onerror = r; })
+    )
+  ));
+  await page.waitForTimeout(1000);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(500);
+}
+
 async function shoot(page, scroll) {
   if (scroll > 0) {
     await page.evaluate((s) => window.scrollTo(0, document.body.scrollHeight * s), scroll);
-    await page.waitForTimeout(600);
+    await page.waitForTimeout(800);
   }
   return page.screenshot({ type: 'png' });
 }
@@ -82,14 +110,16 @@ async function shoot(page, scroll) {
 
     try {
       await pageD.goto(site.url, { waitUntil: 'networkidle', timeout: 45000 });
-      await pageD.waitForTimeout(5000);
+      await pageD.waitForTimeout(3000);
 
       if (site.login) {
         await login(pageD, site.login);
         console.log(`  🔑 logged in`);
-        // wait for dashboard to fully load after login
-        await pageD.waitForTimeout(4000);
+        await pageD.waitForTimeout(3000);
       }
+
+      await waitForFullLoad(pageD);
+      console.log(`  ✓ page fully loaded`);
 
       // portfolio card thumbnail (top of page, desktop)
       const portfolioBuf = await shoot(pageD, 0);
@@ -122,12 +152,14 @@ async function shoot(page, scroll) {
 
     try {
       await pageM.goto(site.url, { waitUntil: 'networkidle', timeout: 45000 });
-      await pageM.waitForTimeout(4000);
+      await pageM.waitForTimeout(3000);
 
       if (site.login) {
         await login(pageM, site.login);
-        await pageM.waitForTimeout(4000);
+        await pageM.waitForTimeout(3000);
       }
+
+      await waitForFullLoad(pageM);
 
       for (const i of site.mobileSlots) {
         await pageM.evaluate(() => window.scrollTo(0, 0));
