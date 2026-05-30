@@ -8,120 +8,122 @@ const SITES = [
     id: 'lotanchik',
     slots: ['cs-hero-lotanchik', 'cs-challenge-lotanchik', 'cs-solution-lotanchik',
             'cs-screen-lotanchik-0', 'cs-screen-lotanchik-1', 'cs-screen-lotanchik-2', 'cs-screen-lotanchik-3'],
+    portfolio: 'work-lotanchik',
+    // scroll positions as fraction of page height for each slot
+    scrolls: [0, 0.22, 0.5, 0, 0.35, 0, 0.28],
+    mobileSlots: [5, 6], // indices that should use mobile viewport
   },
   {
     url: 'https://sushi-kivunim.vercel.app/',
     id: 'sushi',
     slots: ['cs-hero-sushi', 'cs-challenge-sushi', 'cs-solution-sushi',
             'cs-screen-sushi-0', 'cs-screen-sushi-1', 'cs-screen-sushi-2', 'cs-screen-sushi-3'],
+    portfolio: 'work-sushi',
+    scrolls: [0, 0.3, 0.55, 0, 0.4, 0, 0.3],
+    mobileSlots: [5, 6],
   },
   {
     url: 'https://didifun.co.il/',
     id: 'didi',
     slots: ['cs-hero-didi', 'cs-challenge-didi', 'cs-solution-didi',
             'cs-screen-didi-0', 'cs-screen-didi-1', 'cs-screen-didi-2', 'cs-screen-didi-3'],
+    portfolio: 'work-didi',
+    scrolls: [0, 0.25, 0.5, 0, 0.38, 0, 0.25],
+    mobileSlots: [5, 6],
   },
-];
-
-// Viewport configs to capture
-const VIEWPORTS = [
-  { name: 'desktop', width: 1440, height: 900 },
-  { name: 'mobile',  width: 390,  height: 844 },
 ];
 
 async function toDataUrl(buffer) {
   return 'data:image/png;base64,' + buffer.toString('base64');
 }
 
+async function shoot(page, scroll) {
+  if (scroll > 0) {
+    await page.evaluate((s) => window.scrollTo(0, document.body.scrollHeight * s), scroll);
+    await page.waitForTimeout(600);
+  }
+  return page.screenshot({ type: 'png' });
+}
+
 (async () => {
   const browser = await chromium.launch({
     executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--ignore-certificate-errors'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
+           '--disable-blink-features=AutomationControlled'],
   });
 
   const outDir = path.join(__dirname, 'screenshots');
   fs.mkdirSync(outDir, { recursive: true });
 
-  // We'll build the sidecar state JSON for image-slot
-  const sidecarState = {};
+  const sidecar = {};
 
   for (const site of SITES) {
-    console.log(`\n📸 Capturing ${site.url}`);
-    const context = await browser.newContext({
+    console.log(`\n📸  ${site.url}`);
+
+    // ── Desktop context ──────────────────────────────────────
+    const ctxD = await browser.newContext({
       viewport: { width: 1440, height: 900 },
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      ignoreHTTPSErrors: true,
+      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
       locale: 'he-IL',
+      extraHTTPHeaders: { 'Accept-Language': 'he-IL,he;q=0.9,en-US;q=0.8' },
     });
-    const page = await context.newPage();
+    const pageD = await ctxD.newPage();
 
     try {
-      await page.goto(site.url, { waitUntil: 'networkidle', timeout: 30000 });
-      await page.waitForTimeout(2000);
+      await pageD.goto(site.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await pageD.waitForTimeout(3000);
 
-      // Full-page desktop screenshot (hero slot)
-      const heroShot = await page.screenshot({ type: 'png', fullPage: false });
-      const heroFile = path.join(outDir, `${site.id}-desktop.png`);
-      fs.writeFileSync(heroFile, heroShot);
-      sidecarState[site.slots[0]] = { u: await toDataUrl(heroShot), s: 1, x: 0, y: 0 };
-      console.log(`  ✓ hero: ${site.slots[0]}`);
+      // portfolio card thumbnail (top of page, desktop)
+      const portfolioBuf = await shoot(pageD, 0);
+      fs.writeFileSync(path.join(outDir, `${site.id}-desktop.png`), portfolioBuf);
+      sidecar[site.portfolio] = { u: await toDataUrl(portfolioBuf), s: 1, x: 0, y: 0 };
+      console.log(`  ✓ portfolio card: ${site.portfolio}`);
 
-      // Challenge slot — scroll to ~30% of page
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight * 0.25));
-      await page.waitForTimeout(500);
-      const challengeShot = await page.screenshot({ type: 'png', fullPage: false });
-      fs.writeFileSync(path.join(outDir, `${site.id}-challenge.png`), challengeShot);
-      sidecarState[site.slots[1]] = { u: await toDataUrl(challengeShot), s: 1, x: 0, y: 0 };
-      console.log(`  ✓ challenge: ${site.slots[1]}`);
-
-      // Solution slot — scroll to ~55%
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight * 0.5));
-      await page.waitForTimeout(500);
-      const solutionShot = await page.screenshot({ type: 'png', fullPage: false });
-      fs.writeFileSync(path.join(outDir, `${site.id}-solution.png`), solutionShot);
-      sidecarState[site.slots[2]] = { u: await toDataUrl(solutionShot), s: 1, x: 0, y: 0 };
-      console.log(`  ✓ solution: ${site.slots[2]}`);
-
-      // Screen 0 — top of page full viewport
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await page.waitForTimeout(300);
-      const s0 = await page.screenshot({ type: 'png' });
-      sidecarState[site.slots[3]] = { u: await toDataUrl(s0), s: 1, x: 0, y: 0 };
-      console.log(`  ✓ screen-0: ${site.slots[3]}`);
-
-      // Screen 1 — scroll to ~40%
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight * 0.4));
-      await page.waitForTimeout(300);
-      const s1 = await page.screenshot({ type: 'png' });
-      sidecarState[site.slots[4]] = { u: await toDataUrl(s1), s: 1, x: 0, y: 0 };
-      console.log(`  ✓ screen-1: ${site.slots[4]}`);
-
-      // Screen 2 — mobile viewport
-      await page.setViewportSize({ width: 390, height: 844 });
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await page.waitForTimeout(800);
-      const s2 = await page.screenshot({ type: 'png' });
-      sidecarState[site.slots[5]] = { u: await toDataUrl(s2), s: 1, x: 0, y: 0 };
-      console.log(`  ✓ screen-2 (mobile): ${site.slots[5]}`);
-
-      // Screen 3 — mobile scroll ~30%
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight * 0.3));
-      await page.waitForTimeout(300);
-      const s3 = await page.screenshot({ type: 'png' });
-      sidecarState[site.slots[6]] = { u: await toDataUrl(s3), s: 1, x: 0, y: 0 };
-      console.log(`  ✓ screen-3 (mobile-scroll): ${site.slots[6]}`);
-
+      for (let i = 0; i < site.slots.length; i++) {
+        if (site.mobileSlots.includes(i)) continue; // skip mobile slots here
+        await pageD.evaluate(() => window.scrollTo(0, 0));
+        await pageD.waitForTimeout(300);
+        const buf = await shoot(pageD, site.scrolls[i]);
+        fs.writeFileSync(path.join(outDir, `${site.id}-slot${i}.png`), buf);
+        sidecar[site.slots[i]] = { u: await toDataUrl(buf), s: 1, x: 0, y: 0 };
+        console.log(`  ✓ ${site.slots[i]}`);
+      }
     } catch (err) {
-      console.error(`  ✗ Error: ${err.message}`);
+      console.error(`  ✗ desktop: ${err.message}`);
     }
+    await ctxD.close();
 
-    await context.close();
+    // ── Mobile context ───────────────────────────────────────
+    const ctxM = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      ignoreHTTPSErrors: true,
+      userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+      locale: 'he-IL',
+    });
+    const pageM = await ctxM.newPage();
+
+    try {
+      await pageM.goto(site.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await pageM.waitForTimeout(2500);
+
+      for (const i of site.mobileSlots) {
+        await pageM.evaluate(() => window.scrollTo(0, 0));
+        await pageM.waitForTimeout(300);
+        const buf = await shoot(pageM, site.scrolls[i]);
+        fs.writeFileSync(path.join(outDir, `${site.id}-slot${i}-mobile.png`), buf);
+        sidecar[site.slots[i]] = { u: await toDataUrl(buf), s: 1, x: 0, y: 0 };
+        console.log(`  ✓ ${site.slots[i]} (mobile)`);
+      }
+    } catch (err) {
+      console.error(`  ✗ mobile: ${err.message}`);
+    }
+    await ctxM.close();
   }
 
   await browser.close();
 
-  // Write sidecar state file that image-slot reads
   const sidecarPath = path.join(__dirname, '.image-slots.state.json');
-  fs.writeFileSync(sidecarPath, JSON.stringify(sidecarState, null, 2));
-  console.log(`\n✅ Done! Wrote ${Object.keys(sidecarState).length} slots to .image-slots.state.json`);
-  console.log(`📁 PNGs saved to ./screenshots/`);
+  fs.writeFileSync(sidecarPath, JSON.stringify(sidecar, null, 2));
+  console.log(`\n✅  ${Object.keys(sidecar).length} slots → .image-slots.state.json`);
 })();
