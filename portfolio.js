@@ -288,7 +288,7 @@ function Footer() {
           <span style={{display:'inline-flex',alignItems:'baseline',gap:'0.35em'}}>
             Created by
             <img src="assets/adir-logo.svg" alt="Adir"
-              style={{height:'1em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.1em'}} />
+              style={{height:'1em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.1em',opacity:0.48}} />
             designer · {STUDIO.phoneDisplay}
           </span>
         </div>
