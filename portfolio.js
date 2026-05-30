@@ -6,6 +6,7 @@ const STUDIO = {
   phoneDisplay: '054-243-5488',
   wa: 'https://wa.me/972542435488',
   tel: 'tel:0542435488',
+  email: 'adirtal@gmail.com',
 };
 
 const WORKS = [
@@ -239,6 +240,7 @@ function Contact() {
             <a className="btn btn-wa" href={STUDIO.wa} target="_blank" rel="noopener noreferrer">
               שליחת WhatsApp<Arr/>
             </a>
+            <a className="btn btn-phone" href={`mailto:${STUDIO.email}`}>{STUDIO.email}</a>
             <a className="btn btn-phone" href={STUDIO.tel}>{STUDIO.phoneDisplay}</a>
           </div>
         </div>
@@ -270,6 +272,7 @@ function Footer() {
             <div className="footer-col">
               <h4>קשר</h4>
               <a href={STUDIO.wa} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a href={`mailto:${STUDIO.email}`}>{STUDIO.email}</a>
               <a href={STUDIO.tel}>{STUDIO.phoneDisplay}</a>
             </div>
           </div>
