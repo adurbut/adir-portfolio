@@ -39,6 +39,32 @@ async function toDataUrl(buffer) {
   return 'data:image/png;base64,' + buffer.toString('base64');
 }
 
+async function dismissPopups(page) {
+  // try to close any popup/modal/cookie banner
+  const closers = [
+    'button[aria-label*="close" i]', 'button[aria-label*="סגור"]',
+    '.modal-close', '.popup-close', '.close-btn', '[class*="close"]',
+    'button:has-text("סגור")', 'button:has-text("Close")',
+    'button:has-text("OK")', 'button:has-text("אישור")',
+    'button:has-text("המשך")', 'button:has-text("קבל")',
+    '[class*="overlay"] button', '[class*="modal"] button',
+    '[class*="popup"] button', '[class*="dialog"] button',
+  ];
+  for (const sel of closers) {
+    try {
+      const btn = page.locator(sel).first();
+      if (await btn.isVisible({ timeout: 500 })) {
+        await btn.click();
+        await page.waitForTimeout(500);
+        break;
+      }
+    } catch {}
+  }
+  // also press Escape
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(300);
+}
+
 async function login(page, creds) {
   await page.fill('input[type="email"], input[type="text"], input[name="email"], input[name="username"]', creds.user);
   await page.fill('input[type="password"]', creds.pass);
@@ -124,6 +150,7 @@ async function shoot(page, scroll) {
       }
 
       await waitForFullLoad(pageD, site.extraWait || 0);
+      await dismissPopups(pageD);
       console.log(`  ✓ page fully loaded`);
 
       // portfolio card thumbnail — ensure we're at the very top
@@ -167,6 +194,7 @@ async function shoot(page, scroll) {
       }
 
       await waitForFullLoad(pageM, site.extraWait || 0);
+      await dismissPopups(pageM);
 
       for (const i of site.mobileSlots) {
         await pageM.evaluate(() => window.scrollTo(0, 0));
