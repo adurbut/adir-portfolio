@@ -24,6 +24,9 @@ jobs:
 
       - name: צלם צילומי מסך
         run: node screenshot.js
+        env:
+          SUSHI_USER: ${{ secrets.SUSHI_USER }}
+          SUSHI_PASS: ${{ secrets.SUSHI_PASS }}
 
       - name: Push שינויים
         run: |
