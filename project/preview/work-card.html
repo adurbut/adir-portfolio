@@ -1,0 +1,40 @@
+<!-- @dsCard group="Components" title="כרטיס עבודה" subtitle="thumb טונאלי · קטגוריה · CTA" -->
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;background:var(--paper);font-family:var(--font-body);padding:26px 32px;color:var(--ink);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .card{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);}
+  .thumb{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;position:relative;}
+  .num{position:absolute;top:14px;left:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;direction:ltr;white-space:nowrap;}
+  .mark{font-family:var(--font-display);font-weight:700;font-size:54px;}
+  .b{padding:16px 18px 18px;}
+  .cat{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--muted);}
+  h3{font-family:var(--font-display);font-weight:700;font-size:22px;margin:6px 0 0;line-height:1.15;}
+  p{margin:5px 0 0;color:var(--ink-70);font-size:14px;line-height:1.5;}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;}
+  .yr{font-family:var(--font-mono);font-size:12px;color:var(--muted);}
+  .go{font-size:13px;font-weight:700;color:var(--ink);display:inline-flex;gap:6px;align-items:center;}
+</style></head>
+<body>
+  <div class="grid">
+    <article class="card">
+      <div class="thumb" style="background:#D8CFBB">
+        <span class="num" style="color:var(--ink-70)">01 / 04</span>
+        <span class="mark" style="color:var(--ink)">L</span>
+      </div>
+      <div class="b"><span class="cat">דף נחיתה</span><h3>Lumen Skincare</h3><p>דף מכר למותג טיפוח טבעי.</p>
+        <div class="foot"><span class="yr">2025</span><span class="go">לצפייה <svg width="14" height="10" viewBox="0 0 17 13" fill="none"><path d="M16 6.5H1M6.5 1L1 6.5L6.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="thumb" style="background:#16140F">
+        <span class="num" style="color:var(--muted)">02 / 04</span>
+        <span class="mark" style="color:var(--paper)">N</span>
+      </div>
+      <div class="b"><span class="cat">אפליקציה · UI/UX</span><h3>Nava Banking</h3><p>דשבורד בנקאות נקי ונגיש.</p>
+        <div class="foot"><span class="yr">2025</span><span class="go">לצפייה <svg width="14" height="10" viewBox="0 0 17 13" fill="none"><path d="M16 6.5H1M6.5 1L1 6.5L6.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </div>
+    </article>
+  </div>
+</body></html>

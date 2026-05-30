@@ -1,0 +1,84 @@
+/* ============================================================
+   Adir — Design System · Canonical tokens
+   Locked direction: «דיו» (Ink) palette · «ספרותי» (Editorial) type
+   RTL Hebrew. Light/cream base, warm-taupe tonal layers.
+   ------------------------------------------------------------
+   Fonts (Google Fonts):
+   Frank Ruhl Libre (display) · Assistant (body) · IBM Plex Mono (labels)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---- Color · base ---- */
+  --paper:    #f6f3ec;  /* page background — warm cream            */
+  --surface:  #fcfaf4;  /* cards / inputs — lifted cream           */
+  --stone:    #ebe3d2;  /* tonal section background — warm taupe   */
+  --stone-2:  #d8cfbb;  /* deeper taupe — thumbs / fills           */
+
+  /* ---- Color · ink ramp ---- */
+  --ink:      #16140f;  /* primary text & strong fills — near-black */
+  --ink-70:   #4a463d;  /* secondary text / warm-dark panels        */
+  --muted:    #8c8676;  /* captions, meta, taupe-gray fills         */
+  --line:     #e4dece;  /* hairline borders & dividers              */
+
+  /* ---- Color · accent ---- */
+  --accent:     #16140f; /* monochrome accent = ink (CTAs)          */
+  --accent-ink: #f6f3ec; /* text/fg on accent                       */
+
+  /* ---- Typography ---- */
+  --font-display: 'Frank Ruhl Libre', serif;
+  --font-body:    'Assistant', sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  --disp-weight:   700;
+  --disp-tracking: -0.01em;
+  --disp-lh:       1.06;
+
+  /* type scale (desktop, clamp-friendly ceilings) */
+  --fs-display: clamp(44px, 7vw, 88px);
+  --fs-h1:      clamp(32px, 4.6vw, 52px);
+  --fs-h2:      clamp(26px, 3.4vw, 38px);
+  --fs-h3:      26px;
+  --fs-body:    19px;
+  --fs-small:   16px;
+  --fs-cap:     13px;
+
+  --lh-body: 1.7;
+
+  /* ---- Radius ---- */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+
+  /* ---- Spacing scale (4px base) ---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-16: 64px;
+  --sp-section: 116px;
+
+  /* ---- Elevation (used sparingly — boutique = flat + hairline) ---- */
+  --shadow-card: 0 28px 50px -28px color-mix(in oklab, var(--ink) 40%, transparent);
+  --shadow-btn:  0 8px 26px -10px color-mix(in oklab, var(--accent) 70%, transparent);
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(.2,.7,.3,1);
+  --dur: .28s;
+}
+
+/* ============================================================
+   Semantic type helpers (optional — mirror the styleguide)
+   ============================================================ */
+.display { font-family: var(--font-display); font-weight: var(--disp-weight); letter-spacing: var(--disp-tracking); line-height: var(--disp-lh); font-size: var(--fs-display); }
+.h1      { font-family: var(--font-display); font-weight: var(--disp-weight); letter-spacing: var(--disp-tracking); line-height: 1.1;  font-size: var(--fs-h1); }
+.h2      { font-family: var(--font-display); font-weight: var(--disp-weight); line-height: 1.15; font-size: var(--fs-h2); }
+.h3      { font-family: var(--font-display); font-weight: var(--disp-weight); line-height: 1.2;  font-size: var(--fs-h3); }
+.body    { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body); line-height: var(--lh-body); }
+.caption { font-family: var(--font-mono); font-size: var(--fs-cap); letter-spacing: .08em; color: var(--muted); }
+.eyebrow { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .18em; color: var(--muted); }

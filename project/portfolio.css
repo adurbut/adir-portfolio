@@ -1,0 +1,75 @@
+/* ============================================================
+   Adir — Portfolio home page · supplemental styles
+   Reuses tokens from colors_and_type.css and components from adir.css
+   ============================================================ */
+
+/* ---- portfolio hero ---- */
+.p-hero { padding: 84px 0 96px; }
+.p-hero .eyebrow { margin-bottom: 26px; }
+.p-hero h1 {
+  font-family: var(--font-display); font-weight: var(--disp-weight);
+  letter-spacing: var(--disp-tracking); line-height: 1.05;
+  font-size: clamp(42px, 7.2vw, 92px); margin: 0 0 30px; max-width: 15ch;
+}
+.p-hero .lead { font-size: clamp(18px, 2.1vw, 23px); color: var(--ink-70); max-width: 50ch; margin: 0 0 40px; line-height: 1.6; }
+
+/* ---- featured work ---- */
+.featured {
+  display: grid; grid-template-columns: 1.25fr 1fr; gap: 0;
+  border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden;
+  background: var(--surface); transition: box-shadow .35s var(--ease);
+}
+.featured:hover { box-shadow: var(--shadow-card); }
+.featured .slot-wrap { aspect-ratio: 16/11; position: relative; border-inline-start: 1px solid var(--line); }
+.featured .f-body { padding: 48px 46px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.featured .f-index { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .14em; color: var(--muted); direction: ltr; text-align: start; }
+.featured .cat { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; color: var(--muted); }
+.featured h3 { font-family: var(--font-display); font-weight: var(--disp-weight); font-size: clamp(30px, 3.6vw, 44px); margin: 6px 0 4px; line-height: 1.1; }
+.featured p { color: var(--ink-70); font-size: 17px; line-height: 1.65; margin: 0 0 12px; max-width: 42ch; }
+
+/* ---- image slots inside cards ---- */
+image-slot { display: block; width: 100%; height: 100%; }
+.work-thumb image-slot { position: absolute; inset: 0; }
+
+/* ---- external link ---- */
+.ext { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; align-self: flex-start; padding: 11px 20px; border: 1.5px solid var(--ink); border-radius: var(--r-pill); transition: background .2s, color .2s; }
+.ext:hover { background: var(--ink); color: var(--paper); }
+.ext .nw { transition: transform .25s var(--ease); }
+.ext:hover .nw { transform: translate(3px, -3px); }
+.work-foot .ext-min { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; }
+.work-foot .ext-min:hover { color: var(--accent); }
+.work-foot .ext-min .nw { transition: transform .25s var(--ease); display: inline-block; }
+.work-card:hover .work-foot .ext-min .nw { transform: translate(3px, -3px); }
+
+/* ---- services (editorial numbered list) ---- */
+.services-list { border-top: 1px solid var(--line); }
+.service-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 28px; align-items: center; padding: 30px 4px; border-bottom: 1px solid var(--line); transition: padding-inline-start .3s var(--ease), color .25s; }
+.service-row:hover { padding-inline-start: 18px; }
+.service-row .s-idx { font-family: var(--font-mono); font-size: 13px; color: var(--muted); direction: ltr; }
+.service-row .s-name { font-family: var(--font-display); font-weight: var(--disp-weight); font-size: clamp(24px, 3vw, 34px); line-height: 1.1; }
+.service-row .s-desc { font-size: 16px; color: var(--ink-70); max-width: 34ch; justify-self: end; text-align: start; }
+.service-row:hover .s-name { color: var(--ink); }
+
+/* ---- contact block ---- */
+.contact-block { border: 1px solid var(--ink-70); background: var(--ink-70); border-radius: var(--r-lg); padding: 72px 60px; text-align: center; }
+.contact-block .eyebrow { color: color-mix(in oklab, var(--paper) 64%, transparent); justify-content: center; }
+.contact-block .eyebrow .bar { background: color-mix(in oklab, var(--paper) 30%, transparent); }
+.contact-block h2 { font-family: var(--font-display); font-weight: var(--disp-weight); letter-spacing: var(--disp-tracking); font-size: clamp(32px, 5vw, 60px); color: var(--paper); margin: 0 0 20px; line-height: 1.08; }
+.contact-block p { color: color-mix(in oklab, var(--paper) 80%, transparent); font-size: 18px; max-width: 44ch; margin: 0 auto 36px; line-height: 1.6; }
+.contact-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.btn-wa { background: var(--paper); color: var(--ink); }
+.btn-wa:hover { box-shadow: 0 10px 30px -12px rgba(0,0,0,.5); }
+.btn-phone { background: transparent; color: var(--paper); border-color: color-mix(in oklab, var(--paper) 40%, transparent); }
+.btn-phone:hover { background: color-mix(in oklab, var(--paper) 12%, transparent); }
+
+.work-grid.three { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 860px) {
+  .featured { grid-template-columns: 1fr; }
+  .featured .slot-wrap { aspect-ratio: 16/10; border-inline-start: none; border-top: 1px solid var(--line); order: -1; }
+  .featured .f-body { padding: 32px 26px; }
+  .service-row { grid-template-columns: 40px 1fr; }
+  .service-row .s-desc { display: none; }
+  .work-grid.three { grid-template-columns: 1fr; }
+  .contact-block { padding: 48px 26px; }
+}

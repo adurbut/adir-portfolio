@@ -1,0 +1,24 @@
+<!-- @dsCard group="Spacing" title="ספיינג ורדיוס" subtitle="בסיס 4px · sm/md/lg" -->
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;background:var(--paper);font-family:var(--font-body);padding:30px 32px;color:var(--ink);}
+  .row{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;}
+  .box{text-align:center;}
+  .vis{background:color-mix(in oklab, var(--ink) 14%, var(--surface));border:1px solid color-mix(in oklab, var(--ink) 26%, var(--line));}
+  .rad{width:78px;height:78px;background:var(--ink);}
+  .nm{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);margin-top:9px;letter-spacing:.05em;}
+  .sep{width:1px;height:64px;background:var(--line);}
+</style></head>
+<body>
+  <div class="row">
+    <div class="box"><div class="vis" style="width:16px;height:16px;border-radius:3px"></div><div class="nm">4</div></div>
+    <div class="box"><div class="vis" style="width:24px;height:24px;border-radius:3px"></div><div class="nm">8</div></div>
+    <div class="box"><div class="vis" style="width:40px;height:40px;border-radius:3px"></div><div class="nm">12</div></div>
+    <div class="box"><div class="vis" style="width:64px;height:64px;border-radius:3px"></div><div class="nm">16</div></div>
+    <div class="sep"></div>
+    <div class="box"><div class="rad" style="border-radius:8px"></div><div class="nm">sm · 8</div></div>
+    <div class="box"><div class="rad" style="border-radius:14px"></div><div class="nm">md · 14</div></div>
+    <div class="box"><div class="rad" style="border-radius:22px"></div><div class="nm">lg · 22</div></div>
+  </div>
+</body></html>

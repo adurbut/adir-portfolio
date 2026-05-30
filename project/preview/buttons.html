@@ -1,0 +1,29 @@
+<!-- @dsCard group="Components" title="כפתורים ותגיות" subtitle="ראשי · משני · קישור · צ'יפים" -->
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;background:var(--paper);font-family:var(--font-body);padding:28px 32px;color:var(--ink);}
+  .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px;}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:12px 22px;border-radius:999px;border:1.5px solid transparent;text-decoration:none;line-height:1;cursor:pointer;}
+  .p{background:var(--ink);color:var(--paper);}
+  .s{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .g{background:transparent;color:var(--ink);padding-inline:4px;}
+  .chips{display:flex;gap:9px;flex-wrap:wrap;}
+  .chip{font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink-70);background:var(--surface);}
+  .chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  svg{display:inline-block}
+</style></head>
+<body>
+  <div class="row">
+    <a class="btn p">פעולה ראשית <svg width="15" height="11" viewBox="0 0 17 13" fill="none"><path d="M16 6.5H1M6.5 1L1 6.5L6.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="btn s">משני</a>
+    <a class="btn g">קישור <svg width="15" height="11" viewBox="0 0 17 13" fill="none"><path d="M16 6.5H1M6.5 1L1 6.5L6.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="chips">
+    <span class="chip">דפי נחיתה</span>
+    <span class="chip on">אתרים</span>
+    <span class="chip">אפליקציות</span>
+    <span class="chip">מיתוג</span>
+    <span class="chip">פוסטרים</span>
+  </div>
+</body></html>
