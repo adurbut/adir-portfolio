@@ -285,7 +285,12 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 {STUDIO.name} — כל הזכויות שמורות</span>
-          <span>עוצב ונבנה עם <a href="https://claude.ai" target="_blank" rel="noopener" style={{color:'inherit',opacity:.6,textDecoration:'underline',textUnderlineOffset:'3px'}}>Claude</a></span>
+          <span style={{display:'inline-flex',alignItems:'baseline',gap:'0.35em'}}>
+            Created by
+            <img src="assets/adir-logo.svg" alt="Adir"
+              style={{height:'1em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.1em'}} />
+            designer · {STUDIO.phoneDisplay}
+          </span>
         </div>
       </div>
     </footer>

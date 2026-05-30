@@ -37,6 +37,18 @@
 | 02 | סושי · כיוונים | sushi-kivunim.vercel.app | sushi.html |
 | 03 | דידי דימיוני | didifun.co.il | didi.html |
 
+## קרדיט (Credit)
+כשהמשתמש מבקש "קרדיט" — הכוונה לרצועת signature שמוסיפים לאתרי לקוחות:
+
+```
+Created by [לוגו אדיר SVG] designer · 054-243-5488
+```
+
+- הלוגו (`assets/adir-logo.svg`) מוטמע inline, מיושר עם baseline של הפונט (`height:1em; vertical-align:baseline`)
+- הכל בשורה אחת עם `display:inline-flex; align-items:baseline`
+- צבע אחיד התואם לאתר הספציפי (ירש מהצבע הנוכחי)
+- מוסיפים בפוטר של כל אתר שאדיר בנה
+
 ## הערות טכניות
 - סביבת Claude Code on the web חוסמת HTTP חיצוני — screenshot.js עובד רק דרך GitHub Action
 - GitHub Action Secrets: `SUSHI_USER`, `SUSHI_PASS` (למערכת הסושי שמוגנת בסיסמה)
