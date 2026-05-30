@@ -38,16 +38,29 @@
 | 03 | דידי דימיוני | didifun.co.il | didi.html |
 
 ## קרדיט (Credit)
-כשהמשתמש מבקש "קרדיט" — הכוונה לרצועת signature שמוסיפים לאתרי לקוחות:
+כשהמשתמש מבקש "קרדיט" — הכוונה לרצועת signature שמוסיפים לאתרי לקוחות. **רץ על כל הפרויקטים.**
 
 ```
-Created by [לוגו אדיר SVG] designer · 054-243-5488
+Created by [לוגו אדיר SVG] Designs · 0542435488
 ```
 
-- הלוגו (`assets/adir-logo.svg`) מוטמע inline, מיושר עם baseline של הפונט (`height:1em; vertical-align:baseline`)
-- הכל בשורה אחת עם `display:inline-flex; align-items:baseline`
-- צבע אחיד התואם לאתר הספציפי (ירש מהצבע הנוכחי)
-- מוסיפים בפוטר של כל אתר שאדיר בנה
+### קוד מדויק (JSX):
+```jsx
+<span style={{display:'inline-flex',alignItems:'baseline',gap:'0.35em',direction:'ltr'}}>
+  Created by
+  <img src="assets/adir-logo.svg" alt="Adir"
+    style={{height:'1.4em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.15em',opacity:0.48}} />
+  Designs · <span style={{fontSize:'0.82em'}}>0542435488</span>
+</span>
+```
+
+### כללים:
+- **סדר:** Created by → לוגו → Designs · מספר
+- **כיוון:** `direction: ltr` חובה (הדף עברי RTL)
+- **לוגו:** `height: 1.4em`, `opacity: 0.48` (מופיע אפור), מיושר ל-baseline
+- **טלפון:** `font-size: 0.82em` (קטן מעט מהשאר)
+- **צבע:** ירש מהסביבה (`color: var(--muted)` או מה שמתאים לאתר)
+- **מיקום:** בפוטר של כל אתר שאדיר בנה
 
 ## הערות טכניות
 - סביבת Claude Code on the web חוסמת HTTP חיצוני — screenshot.js עובד רק דרך GitHub Action
