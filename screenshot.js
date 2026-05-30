@@ -65,22 +65,23 @@ async function dismissPopups(page) {
     } catch {}
   }
 
-  // remove ALL fixed/absolute elements with high z-index (overlays, modals, popups)
+  // remove ALL fixed-position elements except sticky navs/headers
   await page.evaluate(() => {
+    const keep = new Set();
+    // mark real nav/header elements to keep
+    document.querySelectorAll('nav, header, [role="navigation"], [role="banner"]').forEach(el => {
+      let cur = el;
+      while (cur) { keep.add(cur); cur = cur.parentElement; }
+    });
     document.querySelectorAll('*').forEach(el => {
+      if (keep.has(el)) return;
       try {
         const s = window.getComputedStyle(el);
-        const z = parseInt(s.zIndex) || 0;
-        if ((s.position === 'fixed' || (s.position === 'absolute' && z > 50)) && z > 50) {
-          // keep nav/header by checking if element is a normal nav
-          const tag = el.tagName.toLowerCase();
-          if (tag !== 'nav' && tag !== 'header') el.remove();
-        }
+        if (s.position === 'fixed') el.remove();
       } catch {}
     });
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
-    document.body.style.height = '';
   });
   await page.waitForTimeout(400);
 }
