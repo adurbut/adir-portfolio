@@ -289,7 +289,7 @@ function Footer() {
             Created by
             <img src="assets/adir-logo.svg" alt="Adir"
               style={{height:'1em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.1em',opacity:0.48}} />
-            designer · {STUDIO.phoneDisplay}
+            Designs · 0542435488
           </span>
         </div>
       </div>
