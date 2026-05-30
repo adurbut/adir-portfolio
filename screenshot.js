@@ -40,28 +40,50 @@ async function toDataUrl(buffer) {
 }
 
 async function dismissPopups(page) {
-  // try to close any popup/modal/cookie banner
+  // press Escape first
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(400);
+
+  // try clicking visible close buttons
   const closers = [
     'button[aria-label*="close" i]', 'button[aria-label*="סגור"]',
-    '.modal-close', '.popup-close', '.close-btn', '[class*="close"]',
     'button:has-text("סגור")', 'button:has-text("Close")',
     'button:has-text("OK")', 'button:has-text("אישור")',
     'button:has-text("המשך")', 'button:has-text("קבל")',
+    '[class*="close"]', '[class*="Close"]',
     '[class*="overlay"] button', '[class*="modal"] button',
     '[class*="popup"] button', '[class*="dialog"] button',
   ];
   for (const sel of closers) {
     try {
       const btn = page.locator(sel).first();
-      if (await btn.isVisible({ timeout: 500 })) {
+      if (await btn.isVisible({ timeout: 400 })) {
         await btn.click();
         await page.waitForTimeout(500);
         break;
       }
     } catch {}
   }
-  // also press Escape
-  await page.keyboard.press('Escape');
+
+  // forcefully remove any overlay/modal elements from DOM
+  await page.evaluate(() => {
+    const selectors = [
+      '[class*="overlay"]', '[class*="modal"]', '[class*="popup"]',
+      '[class*="dialog"]', '[class*="Modal"]', '[class*="Popup"]',
+      '[class*="Overlay"]', '[role="dialog"]', '[role="alertdialog"]',
+    ];
+    selectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        const style = window.getComputedStyle(el);
+        if (style.position === 'fixed' || style.position === 'absolute') {
+          el.remove();
+        }
+      });
+    });
+    // also restore body scroll
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+  });
   await page.waitForTimeout(300);
 }
 
