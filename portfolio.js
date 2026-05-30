@@ -88,8 +88,9 @@ function Nav() {
 function Hero() {
   return (
     <header className="wrap p-hero" id="top">
+      <img className="hero-logo-anim" src="assets/adir-logo.svg" alt="Adir" />
       <Eyebrow idx="—">{STUDIO.name} · סטודיו עצמאי</Eyebrow>
-      <h1>מעצב חוויות דיגיטליות שאנשים זוכרים.</h1>
+      <h1>חוויות דיגיטליות.</h1>
       <p className="lead">
         עיצוב ובניית דפי נחיתה, אתרים, אפליקציות ומערכות — מהרעיון הראשוני ועד המוצר החי.
         כל פרויקט נבנה בקו נקי, מדויק, ובהתאמה אישית.
