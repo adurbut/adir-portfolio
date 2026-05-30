@@ -285,7 +285,7 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 {STUDIO.name} — כל הזכויות שמורות</span>
-          <span>נבנה עם תשומת לב לפרטים</span>
+          <span>עוצב ונבנה עם <a href="https://claude.ai" target="_blank" rel="noopener" style={{color:'inherit',opacity:.6,textDecoration:'underline',textUnderlineOffset:'3px'}}>Claude</a></span>
         </div>
       </div>
     </footer>
