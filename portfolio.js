@@ -14,19 +14,19 @@ const WORKS = [
     id: 'work-lotanchik', mark: 'L', index: '01',
     cat: 'דף נחיתה', title: 'לוטנצ׳יק',
     desc: 'דף נחיתה צבעוני וחוויתי לאמנית ילדים — מסיבות קונספט, מופעים והפעלות, עם המרה ישירה ל-WhatsApp, גלריות והמלצות.',
-    yr: '2026', href: 'https://lotanchik.vercel.app/', tone: 'stone',
+    yr: '2026', href: 'https://lotanchik.vercel.app/', caseHref: 'lotanchik.html', tone: 'stone',
   },
   {
     id: 'work-sushi', mark: 'S', index: '02',
     cat: 'מערכת ניהול · UI/UX', title: 'סושי · כיוונים',
     desc: 'מערכת פנימית לניהול בקשות סושיאל מדיה לחברת כיוונים, באר שבע — ממשק מאובטח ונקי.',
-    yr: '2026', href: 'https://sushi-kivunim.vercel.app/', tone: 'ink',
+    yr: '2026', href: 'https://sushi-kivunim.vercel.app/', caseHref: 'sushi.html', tone: 'ink',
   },
   {
     id: 'work-didi', mark: 'D', index: '03',
     cat: 'אתר אינטרנט', title: 'דידי דימיוני',
     desc: 'אתר מותג מלא לעולם תוכן ילדים — הפעלות, שירי ילדים מקוריים, קונספטים, עיצוב הזמנות וערוץ דידי TV.',
-    yr: '2026', href: 'https://didifun.co.il/', tone: 'ink70',
+    yr: '2026', href: 'https://didifun.co.il/', caseHref: 'didi.html', tone: 'ink70',
   },
 ];
 
@@ -115,9 +115,14 @@ function Featured({ w }) {
         <span className="cat">{w.cat}</span>
         <h3>{w.title}</h3>
         <p>{w.desc}</p>
-        <a className="ext" href={w.href} target="_blank" rel="noopener noreferrer">
-          לצפייה באתר החי<NW/>
-        </a>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <a className="ext" href={w.caseHref}>
+            לקריאת תיק העבודה<NW/>
+          </a>
+          <a className="btn btn-ghost btn-sm" href={w.href} target="_blank" rel="noopener noreferrer">
+            לאתר החי<NW/>
+          </a>
+        </div>
       </div>
       <div className="slot-wrap" style={{ background: TONE_BG[w.tone] }}>
         <image-slot
@@ -153,14 +158,14 @@ function WorkCard({ w, total }) {
         <p>{w.desc}</p>
         <div className="work-foot">
           <span className="yr">{w.yr}</span>
-          <a
-            className="ext-min"
-            href={w.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            לצפייה באתר<NW/>
-          </a>
+          <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+            <a className="ext-min" href={w.href} target="_blank" rel="noopener noreferrer">
+              לאתר<NW/>
+            </a>
+            <a className="ext-min" href={w.caseHref}>
+              לתיק<NW/>
+            </a>
+          </div>
         </div>
       </div>
     </article>

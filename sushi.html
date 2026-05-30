@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>סושי · כיוונים — Case Study · אדיר בוטבול</title>
+  <meta name="description" content="מערכת ניהול פנימית לבקשות סושיאל מדיה — ממשק נקי שמחליף כאוס של וואטסאפ ואקסל." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="adir.css" />
+  <link rel="stylesheet" href="portfolio.css" />
+  <link rel="stylesheet" href="case-study.css" />
+  <style>
+    html, body { background: #f6f3ec; margin: 0; padding: 0; }
+    #root { min-height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    window.PROJECT = {
+      id: 'sushi',
+      index: '02',
+      title: 'סושי · כיוונים',
+      cat: 'מערכת ניהול · UI/UX',
+      year: '2026',
+      client: 'כיוונים — סוכנות דיגיטל, ב״ש',
+      href: 'https://sushi-kivunim.vercel.app/',
+      domain: 'sushi-kivunim.vercel.app',
+      tagline: 'כלי פנימי שהפך ניהול בקשות תוכן מכאוס מתיש לזרימה חלקה. פשוט, מאובטח, יעיל.',
+
+      challenge: {
+        title: 'ניהול לקוחות דרך וואטסאפ זה לא ניהול.',
+        body: [
+          'חברת כיוונים בבאר שבע ניהלה עשרות בקשות תוכן סושיאל מדיה בו-זמנית — דרך קבוצות וואטסאפ, גיליונות אקסל, ושרשורי מיילים. כל בקשה עברה בין מספר גורמים, ולא היה ברור מי אחראי, מה הסטטוס, ומתי הכל אמור להיות מוכן.',
+          'הצוות בזבז שעות בשבוע רק על ניהול ה"ניהול". המטרה: מערכת פנימית אחת שמחליפה את כל הכאוס.',
+        ],
+      },
+
+      solution: {
+        title: 'דשבורד אחד שמחליף הכל.',
+        body: [
+          'בנינו מערכת ניהול בקשות (Sushi) עם ממשק נקי ואינטואיטיבי. כל בקשת תוכן עוברת את אותו תהליך: יצירה, הקצאה, ביצוע, אישור — בממשק אחד, מאובטח, שכל הצוות יכול לגשת אליו.',
+          'הדגש היה על פשטות: אפס הכשרה נדרשת. אם אתה יודע להשתמש בוואטסאפ, אתה יודע להשתמש בסושי.',
+        ],
+      },
+
+      features: [
+        {
+          icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+          title: 'ניהול בקשות מרכזי',
+          desc: 'כל הבקשות במקום אחד — עם שדות, תגיות, עדיפות ותאריך יעד. אין יותר גיליונות אקסל.',
+        },
+        {
+          icon: 'M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a2 2 0 014-4z',
+          title: 'מערכת סטטוסים',
+          desc: 'חמישה סטטוסים ברורים: חדש / בעבודה / ממתין לאישור / מאושר / בשידור — כל אחד עם צבע וסינון.',
+        },
+        {
+          icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+          title: 'גישה מאובטחת',
+          desc: 'כניסה עם קוד משתמש — גישה פנימית בלבד. כל פעולה מתועדת עם שם המשתמש והזמן.',
+        },
+        {
+          icon: 'M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z',
+          title: 'סינון ומיון',
+          desc: 'סנן לפי לקוח, סטטוס, עדיפות, או תאריך. מצא כל בקשה תוך שניות גם ב-100 פריטים.',
+        },
+      ],
+
+      screens: [
+        { label: 'גרור צילום מסך — רשימת בקשות', tall: false },
+        { label: 'גרור צילום מסך — פרטי בקשה', tall: false },
+        { label: 'גרור צילום מסך — כניסה', tall: false },
+        { label: 'גרור צילום מסך — מובייל', tall: false },
+      ],
+
+      quote: 'חסכנו בערך 4 שעות עבודה בשבוע רק על ניהול הבקשות. הצוות פשוט עובד עכשיו.',
+    };
+  </script>
+
+  <script src="image-slot.js"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="text/babel" src="case.js"></script>
+</body>
+</html>
