@@ -288,8 +288,8 @@ function Footer() {
           <span style={{display:'inline-flex',alignItems:'baseline',gap:'0.35em',direction:'ltr'}}>
             Created by
             <img src="assets/adir-logo.svg" alt="Adir"
-              style={{height:'1em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.1em',opacity:0.48}} />
-            Designs · 0542435488
+              style={{height:'1.4em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.15em',opacity:0.48}} />
+            Designs · <span style={{fontSize:'0.82em'}}>0542435488</span>
           </span>
         </div>
       </div>
