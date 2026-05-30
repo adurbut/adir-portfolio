@@ -285,7 +285,7 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 {STUDIO.name} — כל הזכויות שמורות</span>
-          <span style={{display:'inline-flex',alignItems:'baseline',gap:'0.35em'}}>
+          <span style={{display:'inline-flex',alignItems:'baseline',gap:'0.35em',direction:'ltr'}}>
             Created by
             <img src="assets/adir-logo.svg" alt="Adir"
               style={{height:'1em',width:'auto',verticalAlign:'baseline',display:'inline-block',position:'relative',top:'0.1em',opacity:0.48}} />
